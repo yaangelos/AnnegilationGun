@@ -1,3 +1,5 @@
 #ANNIGILATION GUN
-Для работы надо установить пакет tqdm:
-python -m pip install tqdm
+Для работы надо установить пакеты:  
+python -m pip install tqdm  
+python -m pip install colorama  
+
