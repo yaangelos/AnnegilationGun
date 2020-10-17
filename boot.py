@@ -31,4 +31,4 @@ def boot():
           f"Обязательно бахнем! И не раз! Весь мир в труху!… Но потом."
           f"{Fore.RESET}{Style.RESET_ALL}")
     time.sleep(3)
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
