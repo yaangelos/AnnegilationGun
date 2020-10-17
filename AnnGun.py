@@ -3,6 +3,7 @@ import boot
 from time import sleep
 import calculate
 import datetime as dt
+import os
 G = 9.81
 SPEED_B = 1000
 CONSOLE_T = 'G.U.N.D.A.M. /># '
@@ -11,8 +12,17 @@ DATA_R = 'datarecord.txt'
 
 class Gun:
     def __init__(self, distance):
-        self.distance = distance
-
+        if distance == 1:
+            if os.path.exists(DATA_R):
+                with open(DATA_R, 'r', encoding='utf-8') as fileopen:
+                    print(fileopen.read())
+                    fileopen.close()
+                    exit(0)
+            else:
+                print("Файла несуществует!!!")
+                exit(0)
+        else:
+            self.distance = distance
     def shoot(self, rec):
         self.rec = rec
         return self.rec
@@ -60,5 +70,6 @@ class MotherBoard(Gun):
 
 
 boot.boot()
-c1 = MotherBoard(int(input(f"{CONSOLE_T}Укажите расстояние до цели(метры):\n>>> ")))
+c1 = MotherBoard(int(input(f"{CONSOLE_T}Укажите расстояние "
+                       f"до цели(метры) или наберите 1 для просмотра записей:\n>>> ")))
 print(c1.shoot(c1.angle_var()))
