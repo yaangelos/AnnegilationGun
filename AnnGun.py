@@ -2,9 +2,11 @@ import math
 import boot
 from time import sleep
 import calculate
+import datetime as dt
 G = 9.81
 SPEED_B = 1000
 CONSOLE_T = 'G.U.N.D.A.M. /># '
+DATA_R = 'datarecord.txt'
 
 
 class Gun:
@@ -43,6 +45,15 @@ class MotherBoard(Gun):
                       f" секунд"
                       f"{boot.Fore.RESET}")
                 self.shoot_gui(time_d)
+                print("Запись данных в файл...")
+                with open(DATA_R, 'a', encoding='utf-8') as fileopen:
+                    fileopen.write(f"Время на текущий момент: {dt.datetime.now()}\n"
+                                   f"Расстояние до цели: {self.distance} "
+                                   f"метров\n"
+                                   f"Угол наведения: {round(math.degrees(math.pi/2 - angle_g), 2)}"
+                                   f" градусов\n"
+                                   f"Время до цели: {round(time_d, 2)} секунд\n")
+                    fileopen.close()
                 return f"CAAABOOOMMMM"
             else:
                 return f"Превышена максимальная дистанция стрельбы..."
